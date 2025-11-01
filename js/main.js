@@ -1,0 +1,112 @@
+/* main.js
+   Efectos globales:
+   - preloader
+   - menú responsive (hamburger)
+   - scroll reveal (IntersectionObserver)
+   - back-to-top button
+   - actualizar año en footer
+   - marcar link activo
+   Vanilla JS, modular y comentado.
+*/
+
+document.addEventListener('DOMContentLoaded', function () {
+  /* ---------- PRELOADER ---------- */
+  window.addEventListener('load', function () {
+    // marca body como loaded para hacer fade del preloader
+    document.body.classList.add('loaded');
+    // opcional: remover nodo preloader luego del fade para limpieza
+    setTimeout(() => {
+      const pre = document.getElementById('preloader');
+      if (pre) pre.remove();
+    }, 700);
+  });
+
+  /* ---------- MENU RESPONSIVE (hamburger) ---------- */
+  function setupMenu(btnId, navId) {
+    const btn = document.getElementById(btnId);
+    const nav = document.getElementById(navId);
+    const fallbackBtn = document.querySelector('.btn-menu');
+    const fallbackNav = document.querySelector('.main-nav');
+
+    const menuBtn = btn || fallbackBtn;
+    const menuNav = nav || fallbackNav;
+
+    if (!menuBtn || !menuNav) return;
+
+    function toggleMenu() {
+      menuBtn.classList.toggle('open');
+      menuNav.classList.toggle('open');
+      // bloquear scroll mobile cuando está abierto
+      const locked = menuNav.classList.contains('open');
+      document.documentElement.style.overflow = locked ? 'hidden' : '';
+      document.body.style.overflow = locked ? 'hidden' : '';
+    }
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    // cerrar si se hace click fuera
+    document.addEventListener('click', (e) => {
+      if (!menuNav.contains(e.target) && !menuBtn.contains(e.target) && menuNav.classList.contains('open')) {
+        toggleMenu();
+      }
+    });
+  }
+
+  // inicializa para los distintos ids usados en tus HTML
+  setupMenu('btn-menu', 'main-nav');
+  setupMenu('btn-menu-2', 'main-nav-2');
+  setupMenu('btn-menu-3', 'main-nav-3');
+  setupMenu('btn-menu-4', 'main-nav-4');
+
+  /* ---------- SCROLL REVEAL (IntersectionObserver) ---------- */
+  const revealEls = document.querySelectorAll('.reveal');
+  if (revealEls.length) {
+    const obs = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => obs.observe(el));
+  }
+
+  /* ---------- BACK TO TOP ---------- */
+  const btnTop = document.getElementById('btn-top') || document.getElementById('btn-top-2') || document.getElementById('btn-top-3') || document.getElementById('btn-top-4');
+  const showAt = 300;
+  function handleScroll() {
+    const y = window.scrollY || window.pageYOffset;
+    if (btnTop) {
+      if (y > showAt) btnTop.classList.add('show'); else btnTop.classList.remove('show');
+    }
+    // header shadow
+    const header = document.querySelector('.site-header');
+    if (header) {
+      if (y > 20) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  if (btnTop) btnTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* ---------- AÑO EN EL FOOTER ---------- */
+  const years = document.querySelectorAll('#year, #year2, #year3, #year4');
+  const y = new Date().getFullYear();
+  years.forEach(el => { if (el) el.textContent = y; });
+
+  /* ---------- ACTIVE LINK (simple) ---------- */
+  const links = document.querySelectorAll('.main-nav .nav-link');
+  links.forEach(a => {
+    try {
+      const href = new URL(a.href, location.href).pathname;
+      const path = location.pathname.endsWith('/') ? location.pathname : location.pathname;
+      if (href === path || href === path.split('/').pop()) a.classList.add('active');
+    } catch (err) { /* ignore */ }
+  });
+
+  
+
+});

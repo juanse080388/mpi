@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Miki Pilates</title>
+
+  <!-- Fonts: Playfair Display (titulos cursiva) + Montserrat (texto) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <!-- PRELOADER (simple fade) -->
+  <div id="preloader" aria-hidden="true"></div>
+
+  <!-- HEADER (fijo arriba) -->
+  <header class="site-header">
+    <div class="header-inner">
+      <!-- SVG LOGO (mono-letra 'M', elegante) -->
+      <a class="logo" href="index.html" aria-label="Movimiento Consciente - Inicio">
+        <!-- SVG: letra M estilizada; editable -->
+        <svg width="56" height="56" viewBox="0 0 100 100" role="img" aria-hidden="false" xmlns="http://www.w3.org/2000/svg">
+          <!-- circle subtle background for logo -->s
+          <circle cx="50" cy="50" r="48" fill="none" stroke="#4b2e1e" stroke-width="2"></circle>
+          <!-- Stylized M using path (scalable) -->
+          <path d="M18 75 L18 32 L38 55 L50 36 L62 55 L82 32 L82 75" fill="none" stroke="#4b2e1e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+      <!-- Desktop nav (visible on wide) / Mobile handled by CSS/JS -->
+      <nav class="main-nav" id="main-nav" aria-label="Menú principal">
+        <ul>
+          
+          <li><a href="./page/nosotros.html" class="nav-link">プロフィール</a></li>
+          <li><a href="./page/galeria.html" class="nav-link">ギャラリー</a></li>
+          <li><a href="./page/contacto.html" class="nav-link">お問い合わせ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hamburger for small screens -->
+      <button id="btn-menu" class="btn-menu" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO (fondo local image con overlay semitransparente) -->
+  <main>
+    <section class="hero reveal">
+      <div class="hero-inner">
+        <h1 class="hero-title">意識的な動き </h1>
+        <p class="hero-sub">強く、しなやかで、つながりのある身体のためのピラティス.</p>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="intro reveal" id="bienvenida">
+      <div class="container">
+        <h2>ようこそ</h2>
+        <p>少人数制クラスで、丁寧な指導と
+           身体のアライメントと呼吸に基づいた確かなテクニックを提供します。
+           一人ひとりのニーズに合わせてセッションを調整します。</p>
+      </div>
+    </section>
+
+    <!-- Servicios breves -->
+    <section class="services reveal">
+      <div class="container grid-3">
+        <article class="card">
+          <h3>プライベートレッスン</h3>
+          <p>目標やコンディションに合わせた個別トレーニング</p>
+        </article>
+        <article class="card">
+          <h3>グループレッスン</h3>
+          <p>技術と安全に重点を置いた少人数グループ</p>
+        </article>
+        <article class="card">
+          <h3>ワークショップ</h3>
+          <p>モビリティ・呼吸・機能的なリカバリー</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <button id="btn-top" aria-label="Volver arriba">↑</button>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Movimiento Consciente — Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX (reutilizable, se activa en galería) -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button id="lightbox-close" class="lightbox-close" aria-label="Cerrar">✕</button>
+    <img id="lightbox-img" src="" alt="Imagen ampliada">
+  </div>
+
+  <!-- SCRIPT PRINCIPAL -->
+  <script src="./js/main.js" defer></script>
+</body>
+</html>
