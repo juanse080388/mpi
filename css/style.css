@@ -10,8 +10,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap');
 
 :root{
-  --bg: #faf3ee;             /* fondo general (claro, minimal) */
-  --marron: #4b2e1e;         /* color principal */
+  --bg: #faf3ee;
+  --marron: #4b2e1e;
   --marron-soft: #8f6b56;
   --text: #2b2b2b;
   --white: #ffffff;
@@ -27,8 +27,8 @@
 /* -------------------------
    RESET y base
    ------------------------- */
-*{box-sizing:border-box}
-html,body{height:100%}
+*{box-sizing:border-box;}
+html,body{height:100%;}
 body{
   margin:0;
   font-family:var(--font-body);
@@ -119,6 +119,7 @@ body.loaded #preloader{ opacity:0; pointer-events:none; }
   height:28px;
   cursor:pointer;
   padding:0;
+  z-index:1100;
 }
 .btn-menu span{
   display:block;
@@ -133,7 +134,7 @@ body.loaded #preloader{ opacity:0; pointer-events:none; }
 .site-header.scrolled{ box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
 
 /* -------------------------
-   HERO (reutilizado en index; incluido por si falta)
+   HERO
    ------------------------- */
 .hero{
   min-height:90vh;
@@ -158,7 +159,7 @@ h2{ font-family:var(--font-title); font-style:italic; text-align:center; font-si
 .muted{ color:#666; text-align:center; }
 
 /* -------------------------
-   GALLERY GRID (IMÁGENES)
+   GALLERY GRID
    ------------------------- */
 .gallery-grid{
   display:grid;
@@ -167,8 +168,6 @@ h2{ font-family:var(--font-title); font-style:italic; text-align:center; font-si
   align-items:stretch;
   margin-top:1.6rem;
 }
-
-/* cada imagen se comporta como tarjeta */
 .gallery-item{
   overflow:hidden;
   border-radius:12px;
@@ -177,8 +176,6 @@ h2{ font-family:var(--font-title); font-style:italic; text-align:center; font-si
   position:relative;
   cursor:zoom-in;
 }
-
-/* img dentro del item */
 .gallery-item img{
   width:100%;
   height:100%;
@@ -187,15 +184,13 @@ h2{ font-family:var(--font-title); font-style:italic; text-align:center; font-si
   transition: transform .45s cubic-bezier(.2,.9,.2,1), filter .35s ease;
   transform-origin:center center;
 }
-
-/* hover zoom suave */
 .gallery-item:hover img{
   transform: scale(1.06);
   filter:brightness(0.98);
 }
 
 /* -------------------------
-   VIDEO GRID (REELS 9:16)
+   VIDEO GRID
    ------------------------- */
 .video-grid{
   display:grid;
@@ -205,8 +200,6 @@ h2{ font-family:var(--font-title); font-style:italic; text-align:center; font-si
   margin-bottom:2rem;
   align-items:start;
 }
-
-/* tarjeta de video (thumbnail) */
 .video-card{
   position:relative;
   overflow:hidden;
@@ -224,8 +217,6 @@ h2{ font-family:var(--font-title); font-style:italic; text-align:center; font-si
   transition: transform .35s ease;
 }
 .video-card:hover img{ transform: scale(1.03); }
-
-/* botón play centrado */
 .video-card .play-btn{
   position:absolute;
   left:50%;
@@ -249,7 +240,7 @@ h2{ font-family:var(--font-title); font-style:italic; text-align:center; font-si
 .video-card:hover .play-btn{ transform:translate(-50%,-50%) scale(1.03); }
 
 /* -------------------------
-   LIGHTBOX (IMÁGENES y VIDEOS)
+   LIGHTBOX
    ------------------------- */
 .lightbox{
   position:fixed;
@@ -265,8 +256,6 @@ h2{ font-family:var(--font-title); font-style:italic; text-align:center; font-si
   padding:20px;
 }
 .lightbox.show{ visibility:visible; opacity:1; }
-
-/* inner container center (caps size for big screens) */
 .lightbox-inner{
   width:100%;
   max-width:1100px;
@@ -276,27 +265,14 @@ h2{ font-family:var(--font-title); font-style:italic; text-align:center; font-si
   justify-content:center;
   position:relative;
 }
-
-/* image displayed inside lightbox */
-.lightbox-inner img{
+.lightbox-inner img, .lightbox-inner iframe{
   max-width:100%;
   max-height:92vh;
   border-radius:10px;
   box-shadow:0 30px 80px rgba(0,0,0,0.6);
   animation: lightboxIn .28s ease;
 }
-
-/* iframe for video */
-.lightbox-inner iframe{
-  width:100%;
-  height:calc(92vh);
-  border-radius:10px;
-  border:0;
-  box-shadow:0 30px 80px rgba(0,0,0,0.6);
-  animation: lightboxIn .28s ease;
-}
-
-/* close button */
+.lightbox-inner iframe{ border:0; }
 .lightbox-close{
   position:fixed;
   top:20px;
@@ -308,11 +284,9 @@ h2{ font-family:var(--font-title); font-style:italic; text-align:center; font-si
   cursor:pointer;
   z-index:1250;
 }
-
-/* small animation */
 @keyframes lightboxIn{
-  from{ transform: translateY(8px) scale(0.99); opacity:0 }
-  to{ transform: translateY(0) scale(1); opacity:1 }
+  from{ transform: translateY(8px) scale(0.99); opacity:0; }
+  to{ transform: translateY(0) scale(1); opacity:1; }
 }
 
 /* -------------------------
@@ -355,19 +329,41 @@ h2{ font-family:var(--font-title); font-style:italic; text-align:center; font-si
 .reveal.visible{ opacity:1; transform: translateY(0); }
 
 /* -------------------------
-   RESPONSIVE
+   RESPONSIVE + MENÚ HAMBURGUESA
    ------------------------- */
-@media (max-width:1000px){
-  .gallery-grid{ grid-template-columns: repeat(2,1fr); }
-  .video-grid{ grid-template-columns: repeat(2,1fr); }
-}
 @media (max-width:720px){
-  .gallery-grid{ grid-template-columns: 1fr; }
-  .video-grid{ grid-template-columns: 1fr; }
-  .btn-menu{ display:block; }
-  .main-nav{ display:none; }
-  .header-inner{ padding:0.6rem 1rem; }
-  .hero{ padding-top:5.2rem; min-height:70vh; }
-}
 
-/* End of stylesheet */
+  .btn-menu{ display:block; z-index:1100; }
+
+  /* menú inicialmente oculto fuera de pantalla */
+  .main-nav{
+    display:flex;
+    flex-direction: column;
+    position: fixed;
+    top:0;
+    right:-100%;
+    width:70%;
+    height:100%;
+    background: rgba(255,255,255,0.95);
+    padding:2rem 1.2rem;
+    gap:1.4rem;
+    transition: right 0.35s ease;
+    z-index:1050;
+  }
+
+  /* menú visible al hacer clic */
+  .main-nav.active{
+    right:0;
+  }
+
+  /* animación hamburguesa */
+  .btn-menu.active span:nth-child(1){
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .btn-menu.active span:nth-child(2){
+    opacity:0;
+  }
+  .btn-menu.active span:nth-child(3){
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+}

@@ -3,33 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Contacto</title>
+  <title>Contacto — Movimiento Consciente</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+  <!-- PRELOADER -->
   <div id="preloader" aria-hidden="true"></div>
-  
-<header class="site-header">
-  <div class="header-inner">
-    <a class="logo" href="../index.html" aria-label="Movimiento Consciente — Inicio">
-      <!-- logo svg -->
-    </a>
 
-    <nav class="main-nav" id="main-nav">
-      <ul>
-        <li><a href="../index.html">ホーム</a></li>
-        <li><a href="./nosotros.html">プロフィール</a></li>
-        <li><a href="./contacto.html">コンタクト</a></li>
-      </ul>
-    </nav>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="../index.html" aria-label="Movimiento Consciente — Inicio">
+        <!-- Aquí iría tu SVG -->
+      </a>
 
-    <button id="btn-menu" class="btn-menu" aria-label="Abrir menú">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
+      <nav class="main-nav" aria-label="Menú principal">
+        <ul>
+          <li><a href="../index.html" class="nav-link">ホーム</a></li>
+          <li><a href="./nosotros.html" class="nav-link">プロフィール</a></li>
+          <li><a href="./contacto.html" class="nav-link">コンタクト</a></li>
+        </ul>
+      </nav>
 
+      <button class="btn-menu" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN -->
   <main>
     <section class="contact reveal">
       <div class="container">
@@ -50,14 +57,17 @@
     </section>
   </main>
 
-  <button id="btn-top-4" class="btn-top" aria-label="Volver arriba">↑</button>
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <button class="btn-top" aria-label="Volver arriba">↑</button>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; <span id="year4"></span> Movimiento Consciente</p>
+      <p>&copy; <span id="year"></span> Movimiento Consciente</p>
     </div>
   </footer>
 
+  <!-- SCRIPTS -->
   <script src="../js/main.js" defer></script>
 </body>
 </html>

@@ -25,7 +25,7 @@
         </svg>
       </a>
 
-      <nav class="main-nav" id="main-nav-3" aria-label="Menú principal">
+      <nav class="main-nav" aria-label="Menú principal">
         <ul>
           <li><a href="../index.html" class="nav-link">ホーム</a></li>
           <li><a href="./nosotros.html" class="nav-link">プロフィール</a></li>
@@ -33,7 +33,7 @@
         </ul>
       </nav>
 
-      <button id="btn-menu-3" class="btn-menu" aria-label="Abrir menú">
+      <button class="btn-menu" aria-label="Abrir menú">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -44,7 +44,7 @@
     <section class="gallery reveal">
       <div class="container">
         <h2>ギャラリー</h2>
-       
+
         <!-- GRID DE IMÁGENES -->
         <div class="gallery-grid">
           <figure class="gallery-item">
@@ -61,7 +61,7 @@
           </figure>
         </div>
 
-        <!-- VIDEOS (REELS 9:16) -->
+        <!-- VIDEOS -->
         <h3 style="margin-top:2rem;">Videos</h3>
         <div class="video-grid">
           <div class="video-card">
@@ -78,12 +78,12 @@
   </main>
 
   <!-- BOTÓN VOLVER ARRIBA -->
-  <button id="btn-top" aria-label="Volver arriba">↑</button>
+  <button class="btn-top" aria-label="Volver arriba">↑</button>
 
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; <span id="year3"></span> Movimiento Consciente</p>
+      <p>&copy; <span id="year"></span> Movimiento Consciente</p>
     </div>
   </footer>
 
@@ -94,15 +94,13 @@
   </div>
 
   <!-- SCRIPTS -->
+  <script src="../js/main.js" defer></script>
+  <script src="../js/lightbox.js" defer></script>
   <script>
     function playVideo(btn, videoSrc){
       const card = btn.parentElement;
-      card.innerHTML = `
-        <video src="${videoSrc}" controls autoplay style="width:100%; height:100%; object-fit:cover; border-radius:12px;"></video>
-      `;
+      card.innerHTML = `<video src="${videoSrc}" controls autoplay style="width:100%; height:100%; object-fit:cover; border-radius:12px;"></video>`;
     }
   </script>
-  <script src="../js/main.js" defer></script>
-  <script src="../js/lightbox.js" defer></script>
 </body>
 </html>
