@@ -1,7 +1,7 @@
 /* main.js
    Efectos globales:
    - preloader
-   - menú responsive (hamburger)
+   - menú responsive (hamburger) full screen semi-transparente desde derecha
    - scroll reveal (IntersectionObserver)
    - back-to-top button
    - actualizar año en footer
@@ -10,18 +10,17 @@
 */
 
 document.addEventListener('DOMContentLoaded', function () {
+
   /* ---------- PRELOADER ---------- */
   window.addEventListener('load', function () {
-    // marca body como loaded para hacer fade del preloader
     document.body.classList.add('loaded');
-    // opcional: remover nodo preloader luego del fade para limpieza
     setTimeout(() => {
       const pre = document.getElementById('preloader');
       if (pre) pre.remove();
     }, 700);
   });
 
-  /* ---------- MENU RESPONSIVE (hamburger) ---------- */
+  /* ---------- MENU RESPONSIVE (hamburger full screen) ---------- */
   function setupMenu(btnId, navId) {
     const btn = document.getElementById(btnId);
     const nav = document.getElementById(navId);
@@ -35,9 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function toggleMenu() {
       menuBtn.classList.toggle('open');
-      menuNav.classList.toggle('open');
-      // bloquear scroll mobile cuando está abierto
-      const locked = menuNav.classList.contains('open');
+      menuNav.classList.toggle('show'); // clase 'show' controla el slide desde derecha
+      const locked = menuNav.classList.contains('show');
       document.documentElement.style.overflow = locked ? 'hidden' : '';
       document.body.style.overflow = locked ? 'hidden' : '';
     }
@@ -49,19 +47,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // cerrar si se hace click fuera
     document.addEventListener('click', (e) => {
-      if (!menuNav.contains(e.target) && !menuBtn.contains(e.target) && menuNav.classList.contains('open')) {
+      if (!menuNav.contains(e.target) && !menuBtn.contains(e.target) && menuNav.classList.contains('show')) {
+        toggleMenu();
+      }
+    });
+
+    // cerrar con ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuNav.classList.contains('show')) {
         toggleMenu();
       }
     });
   }
 
-  // inicializa para los distintos ids usados en tus HTML
+  // inicializa para todos tus HTML
   setupMenu('btn-menu', 'main-nav');
   setupMenu('btn-menu-2', 'main-nav-2');
   setupMenu('btn-menu-3', 'main-nav-3');
   setupMenu('btn-menu-4', 'main-nav-4');
 
-  /* ---------- SCROLL REVEAL (IntersectionObserver) ---------- */
+  /* ---------- SCROLL REVEAL ---------- */
   const revealEls = document.querySelectorAll('.reveal');
   if (revealEls.length) {
     const obs = new IntersectionObserver((entries, observer) => {
@@ -81,12 +86,11 @@ document.addEventListener('DOMContentLoaded', function () {
   function handleScroll() {
     const y = window.scrollY || window.pageYOffset;
     if (btnTop) {
-      if (y > showAt) btnTop.classList.add('show'); else btnTop.classList.remove('show');
+      btnTop.classList.toggle('show', y > showAt);
     }
-    // header shadow
     const header = document.querySelector('.site-header');
     if (header) {
-      if (y > 20) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+      header.classList.toggle('scrolled', y > 20);
     }
   }
   window.addEventListener('scroll', handleScroll, { passive: true });
@@ -97,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const y = new Date().getFullYear();
   years.forEach(el => { if (el) el.textContent = y; });
 
-  /* ---------- ACTIVE LINK (simple) ---------- */
+  /* ---------- ACTIVE LINK ---------- */
   const links = document.querySelectorAll('.main-nav .nav-link');
   links.forEach(a => {
     try {
@@ -106,7 +110,5 @@ document.addEventListener('DOMContentLoaded', function () {
       if (href === path || href === path.split('/').pop()) a.classList.add('active');
     } catch (err) { /* ignore */ }
   });
-
-  
 
 });
